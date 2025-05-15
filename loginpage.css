@@ -1,0 +1,75 @@
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  display: flex;
+  height: 100vh;
+  margin: 0;
+  align-items: center;
+  justify-content: space-around;
+}
+.login-box {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 30px;
+  width: 320px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+h2 {
+  margin-bottom: 5px;
+}
+p {
+  font-size: 0.9rem;
+  color: #888;
+}
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.remember {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+.remember input {
+  margin-right: 5px;
+}
+.actions {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+.login-btn {
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.register {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.85rem;
+}
+.right-section {
+  text-align: center;
+}
+.right-section img.logo {
+  width: 150px;
+  border-radius: 50%;
+}
+.powered {
+  margin-top: 20px;
+  font-size: 0.8rem;
+}
+.powered img {
+  height: 40px;
+  margin: 5px 10px;
+  vertical-align: middle;
+}

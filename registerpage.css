@@ -1,0 +1,88 @@
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      height: 100vh;
+      align-items: center;
+      justify-content: space-around;
+      background-color: #f9f9f9;
+    }
+
+    .signup-box {
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      padding: 30px;
+      width: 320px;
+      background-color: white;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    input[type="email"],
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+
+    .register-btn {
+      width: 100%;
+      background-color: black;
+      color: white;
+      padding: 10px;
+      border: none;
+      margin-top: 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .login-link {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    .login-link a {
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    .right-section {
+      text-align: center;
+    }
+
+    .right-section img.logo {
+      width: 150px;
+      border-radius: 50%;
+    }
+
+    .powered {
+      margin-top: 20px;
+      font-size: 0.8rem;
+    }
+
+    .powered img {
+      height: 40px;
+      margin: 5px 10px;
+      vertical-align: middle;
+    }

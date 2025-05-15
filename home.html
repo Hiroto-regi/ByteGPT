@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BYTEGPT Home</title>
+  <link rel="stylesheet" href="homepage.css" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>ByteGPT</h2>
+    <div class="avail-prompts-btn">
+      <img src="access.png" alt="Prompt Icon" />
+      <div>
+        <p><strong>Avail Prompts</strong></p>
+        <small>Gain more access to ByteGPT</small>
+      </div>
+    </div>
+    <div class="action-buttons">
+      <button disabled>Custom Prompts</button>
+      <button disabled>Your Data</button>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <header class="top-bar">
+      <span class="remaining-prompts">
+        Remaining Prompts: <span id="remaining-count">∞</span>
+      </span>
+      <div class="profile-container">
+        <div class="profile-icon" onclick="toggleDropdown()">T</div>
+        <div id="dropdown" class="dropdown">
+          <button>Settings</button>
+          <button>Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="center-box">
+      <h1>What can I help with?</h1>
+    </div>
+
+    <!-- Chat window -->
+    <div id="chat" class="chat-window"></div>
+
+    <!-- Chat input form -->
+    <form id="chat-form" class="chat-form">
+      <input
+        id="chat-input"
+        type="text"
+        placeholder="Ask anything..."
+        autocomplete="off"
+      />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <!-- Sidebar/profile dropdown logic -->
+  <script>
+    function toggleDropdown() {
+      document.getElementById('dropdown').classList.toggle('show');
+    }
+    window.onclick = e => {
+      if (!e.target.matches('.profile-icon')) {
+        document.getElementById('dropdown').classList.remove('show');
+      }
+    };
+  </script>
+
+  <!-- GPT2 Local Integration with transformers.js -->
+<script type="module">
+  import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.6.0/dist/transformers.min.js';
+
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const chat = document.getElementById('chat');
+  let generator;
+
+  async function loadModel() {
+    const loading = document.createElement('div');
+    loading.className = 'message assistant';
+    loading.textContent = '⏳ Loading GPT-2...';
+    chat.appendChild(loading);
+    chat.scrollTop = chat.scrollHeight;
+
+    // ✅ Corrected path — gpt2 is in the same folder as home.html
+    generator = await pipeline('text-generation', './', {
+      quantized: true
+    });
+
+    loading.textContent = '✅ GPT-2 ready! Ask anything.';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const userText = input.value.trim();
+    if (!userText || !generator) return;
+
+    const userBubble = document.createElement('div');
+    userBubble.className = 'message user';
+    userBubble.textContent = userText;
+    chat.appendChild(userBubble);
+    input.value = '';
+    chat.scrollTop = chat.scrollHeight;
+
+    const assistantBubble = document.createElement('div');
+    assistantBubble.className = 'message assistant';
+    assistantBubble.textContent = '…thinking…';
+    chat.appendChild(assistantBubble);
+    chat.scrollTop = chat.scrollHeight;
+
+    try {
+      const result = await generator(userText, { max_new_tokens: 50 });
+      assistantBubble.textContent = result[0].generated_text || '⚠️ No response.';
+    } catch (err) {
+      console.error(err);
+      assistantBubble.textContent = '⚠️ Error generating response.';
+    }
+
+    chat.scrollTop = chat.scrollHeight;
+  });
+
+  loadModel();
+</script>
+
+
+
+</body>
+</html>
